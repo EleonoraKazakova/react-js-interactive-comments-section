@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./app.sass";
 import data from "./data.json";
 import BlockComment from "./BlockComment";
