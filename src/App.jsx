@@ -5,7 +5,7 @@ import BlockComment from "./BlockComment";
 
 function App() {
   const comments = data.comments.map((comment) => (
-    <BlockComment comment={comment} />
+    <BlockComment comment={comment} key={comment.id} />
   ));
   return (
     <div className="app app-grid">

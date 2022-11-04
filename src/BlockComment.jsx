@@ -1,18 +1,9 @@
 import "./styles/blockComment.sass";
-import { useState } from "react";
+import ReplyBlock from "./ReplyBlock";
 
 export default function BlockComment({ comment }) {
-  console.log("comment:", comment);
-
-  const [edit, setEdit] = useState(false);
-  function editContent() {}
-
   const replyesBlock = comment.replies.map((reply) => (
-    <div className="block-comment-reply-item">
-      {reply.score}, {reply.createdAt}
-      {edit ? <textarea>{reply.content}</textarea> : <div>{reply.content}</div>}
-      <div onClick={() => setEdit(!edit)}>{edit ? "Submit" : "Edit"}</div>
-    </div>
+    <ReplyBlock reply={reply} key={reply.id} />
   ));
 
   return (
