@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./styles/score.sass";
+import "../styles/score.sass";
 
 export default function CommentScore({ score }) {
   const [currentScore, setCurrentScore] = useState(score);

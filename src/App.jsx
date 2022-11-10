@@ -1,6 +1,6 @@
-import "./app.sass";
+import "./styles/app.sass";
 import data from "./data.json";
-import BlockComment from "./BlockComment";
+import BlockComment from "./components/BlockComment";
 
 function App() {
   const comments = data.comments.map((comment) => (
