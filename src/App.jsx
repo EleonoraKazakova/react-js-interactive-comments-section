@@ -1,10 +1,10 @@
 import "./styles/app.sass";
 import data from "./data.json";
-import BlockComment from "./components/BlockComment";
+import Block from "./components/Block";
 
 function App() {
   const comments = data.comments.map((comment) => (
-    <BlockComment comment={comment} key={comment.id} />
+    <Block comment={comment} key={comment.id} />
   ));
   return (
     <div className="app app-grid">

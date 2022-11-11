@@ -1,18 +1,25 @@
 import { useState } from "react";
-import "../styles/blockComment.sass";
 import EditBlock from "./EditBlock";
 import CommentScore from "./CommentScore";
 import ReplyBlock from "./ReplyBlock";
 import ReplyBtn from "./buttons/ReplyBtn";
+import EditContent from "./EditContent";
+import "../styles/blockComment.sass";
 
-export default function BlockComment({ comment }) {
+export default function Block({ comment }) {
+  const [edit, setEdit] = useState(false);
   const [replyStatus, setReplyStatus] = useState(false);
   const [repliesArr, setRepliesArr] = useState(comment.replies);
+
   const replyesBlock = repliesArr.map((reply) => (
     <EditBlock reply={reply} key={reply.id} />
   ));
 
-  console.log("comment.user.image.jpg:", comment.user.image.jpg);
+  function editContent(event) {
+    event.preventDefault();
+    setEdit(!edit);
+  }
+
   return (
     <div className="block-comment-main">
       <div className="block-comment">
@@ -27,13 +34,17 @@ export default function BlockComment({ comment }) {
             src={require(`../images/${comment.user.image.jpg}`)}
             className="block-comment-img"
           />
-          {comment.createdAt},{comment.user.username}
+          {comment.createdAt} {comment.user.username}
         </div>
 
         <ReplyBtn setReplyStatus={setReplyStatus} replyStatus={replyStatus} />
-
-        <p className="block-comment-content">{comment.content}</p>
+        <EditContent content={comment.content} edit={edit} />
+        <div onClick={(event) => editContent(event)}>
+          {edit ? <button>Submit</button> : <button>Edit</button>}
+        </div>
+        
       </div>
+
       <div className="block-comment-reply-block">{replyesBlock}</div>
 
       {replyStatus ? (

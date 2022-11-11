@@ -1,6 +1,7 @@
 import { useState } from "react";
 import data from "../data.json";
 import "../styles/reply-block.sass";
+import SubmitBtn from "./buttons/SubmitBtn";
 
 export default function ReplyBlock({
   reply,
@@ -26,6 +27,8 @@ export default function ReplyBlock({
         username: currentUser.username,
         content: replyCurrent,
         user: { image: { jpg: currentUser.image.jpg } },
+        score: 0,
+        replies: [],
       },
     ]);
     setReplyStatus(false);
@@ -33,19 +36,25 @@ export default function ReplyBlock({
 
   console.log("updatedReply:", updatedReply);
   return (
-    <div>
-      <img
-        src={require(`../images/${currentUser.image.jpg}`)}
-        className="reply-block-img"
+    <div className="reply-block">
+      <div>
+        <img
+          src={require(`../images/${currentUser.image.jpg}`)}
+          className="reply-block-img"
+        />
+      </div>
+      <textarea
+        className="textarea"
+        role="textbox"
+        contentEditable=""
+        onChange={(event) => setReplyCurrent(event.target.value)}
+      ></textarea>
+
+      <SubmitBtn
+        createComment={createComment}
+        setRepliesArr={setRepliesArr}
+        updatedReply={updatedReply}
       />
-      {currentUser.username}
-      <textarea onChange={(event) => setReplyCurrent(event.target.value)} />
-      <button
-        onClick={createComment}
-        onChange={() => setRepliesArr(updatedReply)}
-      >
-        Submit
-      </button>
     </div>
   );
 }
