@@ -2,6 +2,7 @@ import { useState } from "react";
 import data from "../data.json";
 import "../styles/reply-block.sass";
 import SubmitBtn from "./buttons/SubmitBtn";
+import Textarea from "./elements/Textarea";
 
 export default function ReplyBlock({
   reply,
@@ -28,6 +29,7 @@ export default function ReplyBlock({
         content: replyCurrent,
         user: { image: { jpg: currentUser.image.jpg } },
         score: 0,
+        createdAt: new Date(),
         replies: [],
       },
     ]);
@@ -43,12 +45,8 @@ export default function ReplyBlock({
           className="reply-block-img"
         />
       </div>
-      <textarea
-        className="textarea"
-        role="textbox"
-        contentEditable=""
-        onChange={(event) => setReplyCurrent(event.target.value)}
-      ></textarea>
+      
+     <Textarea setReplyCurrent={setReplyCurrent}></Textarea> 
 
       <SubmitBtn
         createComment={createComment}

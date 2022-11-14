@@ -5,11 +5,15 @@ import ReplyBlock from "./ReplyBlock";
 import ReplyBtn from "./buttons/ReplyBtn";
 import EditContent from "./EditContent";
 import "../styles/blockComment.sass";
+import Moment from "react-moment";
+import "moment-timezone";
 
-export default function Block({ comment }) {
+export default function Block({ comment, currentUser }) {
   const [edit, setEdit] = useState(false);
   const [replyStatus, setReplyStatus] = useState(false);
   const [repliesArr, setRepliesArr] = useState(comment.replies);
+  console.log("comment2:", comment);
+  const date = new Date();
 
   const replyesBlock = repliesArr.map((reply) => (
     <EditBlock reply={reply} key={reply.id} />
@@ -34,15 +38,20 @@ export default function Block({ comment }) {
             src={require(`../images/${comment.user.image.jpg}`)}
             className="block-comment-img"
           />
-          {comment.createdAt} {comment.user.username}
+
+          {comment.user.username}
+
+          <Moment from={date}>{comment.createdAt}</Moment>
         </div>
 
         <ReplyBtn setReplyStatus={setReplyStatus} replyStatus={replyStatus} />
+
         <EditContent content={comment.content} edit={edit} />
-        <div onClick={(event) => editContent(event)}>
-          {edit ? <button>Submit</button> : <button>Edit</button>}
-        </div>
-        
+        {currentUser === comment.user.username ? (
+          <div onClick={(event) => editContent(event)}>
+            {edit ? <button>Submit</button> : <button>Edit</button>}
+          </div>
+        ) : null}
       </div>
 
       <div className="block-comment-reply-block">{replyesBlock}</div>

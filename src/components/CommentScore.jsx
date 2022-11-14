@@ -13,9 +13,9 @@ export default function CommentScore({ score }) {
 
   return (
     <>
-      <span onClick={addScore}>+</span>
-      {currentScore}
-      <span onClick={subtractScore}>-</span>
+      <span onClick={addScore} className='score-sign'>+</span>
+      <span className="score-number">{currentScore}</span>
+      <span onClick={subtractScore} className='score-sign'>-</span>
     </>
   );
 }
