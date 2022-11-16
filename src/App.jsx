@@ -12,25 +12,29 @@ function App() {
   const [allMessages, setAllMessages] = useState(data.comments);
 
   const comments = allMessages.map((comment) => (
-    <Block comment={comment} key={comment.id} currentUser={currentUser} />
+    <Block
+      comment={comment}
+      key={comment.id}
+      currentUser={currentUser}
+      setAllMessages={setAllMessages}
+    />
   ));
 
-  console.log("commentsArr:", commentsArr);
+  console.log("allMessages:", allMessages);
   return (
     <div className="app app-grid">
       <div className="app-content">
-      <CurrentUser currentUser={currentUser} />
-        
+        <CurrentUser currentUser={currentUser} />
 
         <div className="app-list"> {comments} </div>
-        {statusMessage ? (
+        {/*statusMessage ? (
           <ReplyBlock
             reply={{ replies: [] }}
             setRepliesArr={setAllMessages}
             repliesArr={allMessages}
             setReplyStatus={true}
           />
-        ) : null}
+        ) : null*/}
       </div>
     </div>
   );

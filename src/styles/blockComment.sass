@@ -7,7 +7,7 @@
   grid-template-columns: 50px auto auto
   grid-template-rows: 50px auto
   padding: 20px
-
+  gap: 10px
 
 .block-comment-reply-block
   display: flex
@@ -22,7 +22,12 @@
   width: 100%
   display: flex
   flex-direction: column
-  
+
+.block-comment-username
+  font-weight: bold
+
+.block-comment-time
+  color: colors.$gray
 
 .block-comment-main
   display: flex
@@ -40,9 +45,10 @@
   grid-row: 1/2
   grid-column: 2/3
   display: flex
-  justify-content: center
+  justify-content: flex-start
   flex-direction: row
   align-items: center
+  gap: 15px
 
 .block-comment-reply
   display: flex

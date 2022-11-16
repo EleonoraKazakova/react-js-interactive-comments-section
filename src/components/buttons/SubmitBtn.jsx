@@ -8,7 +8,7 @@ export default function SubmitBtn({
   return (
     <button
       onClick={createComment}
-      onChange={() => setRepliesArr(updatedReply)}
+      onChange={setRepliesArr}
       className="submit-btn"
     >
       Submit

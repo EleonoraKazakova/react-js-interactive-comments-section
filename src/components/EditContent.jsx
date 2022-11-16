@@ -1,8 +1,7 @@
 import { useState } from "react";
 
 export default function EditContent({ content, edit }) {
-  const baseContent = content;
-  const [replyContent, setEditContent] = useState(baseContent);
+  const [replyContent, setEditContent] = useState(content);
 
   return (
     <div>

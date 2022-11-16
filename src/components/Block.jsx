@@ -8,20 +8,31 @@ import "../styles/blockComment.sass";
 import Moment from "react-moment";
 import "moment-timezone";
 
-export default function Block({ comment, currentUser }) {
+export default function Block({ comment, currentUser, setAllMessages }) {
   const [edit, setEdit] = useState(false);
   const [replyStatus, setReplyStatus] = useState(false);
   const [repliesArr, setRepliesArr] = useState(comment.replies);
-  console.log("comment2:", comment);
+  console.log("repliesArr:", repliesArr);
+  console.log("comment:", comment);
   const date = new Date();
 
   const replyesBlock = repliesArr.map((reply) => (
-    <EditBlock reply={reply} key={reply.id} />
+    <Block
+      comment={reply}
+      key={reply.id}
+      currentUser={currentUser}
+      setAllMessages={setRepliesArr}
+    />
   ));
 
-  function editContent(event) {
-    event.preventDefault();
+  function editContent() {
     setEdit(!edit);
+  }
+
+  function deleteComment() {
+    setAllMessages((oldMessages) =>
+      oldMessages.filter((el) => el.id !== comment.id)
+    );
   }
 
   return (
@@ -39,18 +50,25 @@ export default function Block({ comment, currentUser }) {
             className="block-comment-img"
           />
 
-          {comment.user.username}
+          <span className="block-comment-username">{comment.username}</span>
 
-          <Moment from={date}>{comment.createdAt}</Moment>
+          <div className="block-comment-time">
+            <Moment from={date}>{comment.createdAt}</Moment>
+          </div>
         </div>
 
         <ReplyBtn setReplyStatus={setReplyStatus} replyStatus={replyStatus} />
 
         <EditContent content={comment.content} edit={edit} />
-        {currentUser === comment.user.username ? (
-          <div onClick={(event) => editContent(event)}>
-            {edit ? <button>Submit</button> : <button>Edit</button>}
-          </div>
+
+        {currentUser === comment.username ? (
+          <>
+            <div onClick={editContent}>
+              {edit ? <button>Submit</button> : <button>Edit</button>}
+            </div>
+
+            <button onClick={deleteComment}>Delete</button>
+          </>
         ) : null}
       </div>
 
