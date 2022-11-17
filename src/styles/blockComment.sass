@@ -1,21 +1,15 @@
 @use '_colors'
-
-.block-comment
-  background-color: #fff
-  border-radius: 7px
-  display: grid
-  grid-template-columns: 50px auto auto
-  grid-template-rows: 50px auto
-  padding: 20px
-  gap: 10px
-
-.block-comment-reply-block
+ 
+@mixin btn
   display: flex
-  gap:20px
-  flex-direction: column
-  margin-left: 50px
-  
+  align-items: center
+  gap: 5px
+  font-weight: bold
 
+
+
+
+  
 .block-comment-reply-item
   background-color: #fff
   border-radius: 7px
@@ -32,38 +26,14 @@
 .block-comment-main
   display: flex
   flex-direction: column
-  gap: 20px
-
-.block-comment-score
-  grid-row: 1/3
-  grid-column: 1/2
-  display: flex
-  justify-content: center
-  flex-direction: flex-start
-
-.block-comment-user
-  grid-row: 1/2
-  grid-column: 2/3
-  display: flex
-  justify-content: flex-start
-  flex-direction: row
-  align-items: center
-  gap: 15px
 
 .block-comment-reply
   display: flex
   justify-content: center
   align-items: center
-
-.block-comment-content
-  grid-row: 2/3
-  grid-column: 2/4
-  display: flex
-  justify-content: center
-  flex-direction: flex-start
     
 .block-comment-score-button
-  background-color: colors.$light-blue
+  background-color: colors.$score-blue
   width: 40px
   height: 80px
   display: flex
@@ -76,5 +46,132 @@
   height: 40px
   border-radius: 40px
 
+.block-comment-delete
+  @include btn
+  color: colors.$light-red
+  &::before
+    content: url('../images/trash-solid.svg')
+    width: 15px
+    height: 15px
 
+.block-comment-edit
+  color: colors.$blue
+  @include btn
   
+@media (min-width: 1000px)
+  .block-comment
+    background-color: #fff
+    border-radius: 7px
+    display: grid
+    grid-template-columns: 50px auto auto
+    grid-template-rows: 50px auto
+    padding: 20px
+    gap: 10px
+
+  .block-comment-score
+    grid-row: 1/3
+    grid-column: 1/2
+    display: flex
+    justify-content: center
+    flex-direction: flex-start
+
+  .block-comment-buttons
+    grid-row: 1/2
+    grid-column: 3/4
+    display: flex
+    justify-content: flex-end
+    flex-direction: row
+    align-items: center
+    gap: 10px
+
+  .block-comment-user
+    grid-row: 1/2
+    grid-column: 2/3
+    display: flex
+    justify-content: flex-start
+    flex-direction: row
+    align-items: center
+    gap: 15px
+
+  .block-comment-content
+    grid-row: 2/3
+    grid-column: 2/4
+    display: flex
+    justify-content: center
+    flex-direction: flex-start
+
+  .block-comment-reply-block
+    display: flex
+    gap:20px
+    flex-direction: column
+    margin-left: 50px
+    border-left: 2px colors.$line-blue solid
+    padding-left: 15px
+    justify-content: space-between
+    margin-top: 20px
+
+@media (max-width: 1000px)
+  .block-comment
+    background-color: #fff
+    border-radius: 7px
+    display: grid
+    grid-template-columns: auto auto
+    grid-template-rows: 50px auto auto
+    padding: 20px
+    gap: 10px
+
+  .block-comment-score
+    grid-row: 3/4
+    grid-column: 1/2
+    display: flex
+    justify-content: flex-start
+    
+
+  .block-comment-buttons
+    grid-row: 3/4
+    grid-column: 2/3
+    display: flex
+    justify-content: flex-end
+    flex-direction: row
+    align-items: center
+    gap: 10px
+
+  .block-comment-user
+    grid-row: 1/2
+    grid-column: 1/3
+    display: flex
+    justify-content: flex-start
+    flex-direction: row
+    align-items: center
+    gap: 15px
+
+  .block-comment-content
+    grid-row: 2/3
+    grid-column: 1/3
+    display: flex
+    justify-content: center
+    flex-direction: flex-start
+
+  .block-comment-score-button
+    background-color: colors.$score-blue
+    height: 40px
+    width: 80px
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    border-radius: 7px
+    align-items: center
+    padding: 10px
+
+  .block-comment-reply-block
+    display: flex
+    gap:20px
+    flex-direction: column
+    margin-left: 15px
+    border-left: 2px colors.$line-blue solid
+    padding-left: 10px
+    justify-content: space-between
+    margin-top: 20px
+ 
+
+ 

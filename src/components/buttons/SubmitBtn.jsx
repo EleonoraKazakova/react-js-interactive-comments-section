@@ -11,7 +11,7 @@ export default function SubmitBtn({
       onChange={setRepliesArr}
       className="submit-btn"
     >
-      Submit
+      Reply
     </button>
   );
 }

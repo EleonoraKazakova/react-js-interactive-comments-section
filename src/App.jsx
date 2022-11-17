@@ -27,14 +27,14 @@ function App() {
         <CurrentUser currentUser={currentUser} />
 
         <div className="app-list"> {comments} </div>
-        {/*statusMessage ? (
+        {statusMessage ? (
           <ReplyBlock
             reply={{ replies: [] }}
             setRepliesArr={setAllMessages}
             repliesArr={allMessages}
             setReplyStatus={true}
           />
-        ) : null*/}
+        ) : null}
       </div>
     </div>
   );

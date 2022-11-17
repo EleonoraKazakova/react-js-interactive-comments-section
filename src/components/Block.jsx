@@ -1,20 +1,15 @@
 import { useState } from "react";
-import EditBlock from "./EditBlock";
+import BlockUser from "./BlockUser";
 import CommentScore from "./CommentScore";
 import ReplyBlock from "./ReplyBlock";
 import ReplyBtn from "./buttons/ReplyBtn";
 import EditContent from "./EditContent";
 import "../styles/blockComment.sass";
-import Moment from "react-moment";
-import "moment-timezone";
 
 export default function Block({ comment, currentUser, setAllMessages }) {
   const [edit, setEdit] = useState(false);
   const [replyStatus, setReplyStatus] = useState(false);
   const [repliesArr, setRepliesArr] = useState(comment.replies);
-  console.log("repliesArr:", repliesArr);
-  console.log("comment:", comment);
-  const date = new Date();
 
   const replyesBlock = repliesArr.map((reply) => (
     <Block
@@ -45,34 +40,39 @@ export default function Block({ comment, currentUser, setAllMessages }) {
         </div>
 
         <div className="block-comment-user">
-          <img
-            src={require(`../images/${comment.user.image.jpg}`)}
-            className="block-comment-img"
-          />
-
-          <span className="block-comment-username">{comment.username}</span>
-
-          <div className="block-comment-time">
-            <Moment from={date}>{comment.createdAt}</Moment>
-          </div>
+          <BlockUser comment={comment} />
         </div>
 
-        <ReplyBtn setReplyStatus={setReplyStatus} replyStatus={replyStatus} />
+        <div className="block-comment-buttons">
+          {currentUser === comment.username ? (
+            <>
+              <button onClick={deleteComment} className="block-comment-delete">
+                Delete
+              </button>
 
-        <EditContent content={comment.content} edit={edit} />
-
-        {currentUser === comment.username ? (
-          <>
-            <div onClick={editContent}>
-              {edit ? <button>Submit</button> : <button>Edit</button>}
-            </div>
-
-            <button onClick={deleteComment}>Delete</button>
-          </>
-        ) : null}
+              <div onClick={editContent}>
+                {edit ? (
+                  <button>Submit</button>
+                ) : (
+                  <button className="block-comment-edit">Edit</button>
+                )}
+              </div>
+            </>
+          ) : (
+            <ReplyBtn
+              setReplyStatus={setReplyStatus}
+              replyStatus={replyStatus}
+            />
+          )}
+        </div>
+        <div className="block-comment-content">
+          <EditContent content={comment.content} edit={edit} />
+        </div>
       </div>
 
-      <div className="block-comment-reply-block">{replyesBlock}</div>
+      {replyesBlock.length > 0 ? (
+        <div className="block-comment-reply-block">{replyesBlock}</div>
+      ) : null}
 
       {replyStatus ? (
         <ReplyBlock
